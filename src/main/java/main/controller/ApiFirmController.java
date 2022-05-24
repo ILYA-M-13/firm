@@ -5,7 +5,6 @@ import main.DAO.model.Department;
 import main.DAO.model.Employee;
 import main.api.request.DepartmentRequest;
 import main.api.request.EmployeeRequest;
-import main.api.response.EmployeeWithSalaryResponse;
 import main.api.response.ErrorResponse;
 import main.api.response.SalaryProjection;
 import main.service.DepartmentService;
@@ -24,7 +23,6 @@ public class ApiFirmController {
 
 private final EmployeeService es;
 private final DepartmentService ds;
-
 
     @GetMapping("/employee")
     public ResponseEntity<List<Employee>> getAll() {
@@ -77,7 +75,7 @@ private final DepartmentService ds;
     }
 
     @GetMapping("/employee/byDepart")
-    public ResponseEntity <List<EmployeeWithSalaryResponse>> getEmployeeWithSalary() {
+    public ResponseEntity <Map<String, Map<String, Integer>>> getEmployeeWithSalary() {
         return ResponseEntity.ok(ds.getEmployeeWithSalaryByDepart());
     }
 }

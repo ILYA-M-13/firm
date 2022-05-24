@@ -2,11 +2,11 @@ package main.service;
 
 import main.DAO.model.Department;
 import main.api.request.DepartmentRequest;
-import main.api.response.EmployeeWithSalaryResponse;
 import main.api.response.ErrorResponse;
 import main.api.response.SalaryProjection;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DepartmentService {
 
@@ -16,7 +16,7 @@ public interface DepartmentService {
 
     List<SalaryProjection> getDepartmentWithAVGSalary();
 
-    List<EmployeeWithSalaryResponse> getEmployeeWithSalaryByDepart();
+    Map<String, Map<String, Integer>> getEmployeeWithSalaryByDepart();
 
 
 }

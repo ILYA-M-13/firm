@@ -3,16 +3,13 @@ package main.service;
 import lombok.AllArgsConstructor;
 import main.DAO.Repository.DepartmentRepository;
 import main.DAO.Repository.EmployeeRepository;
-
 import main.DAO.model.Department;
 import main.DAO.model.Employee;
 import main.api.request.DepartmentRequest;
-import main.api.response.EmployeeWithSalaryResponse;
 import main.api.response.ErrorResponse;
 import main.api.response.SalaryProjection;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,19 +53,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<EmployeeWithSalaryResponse> getEmployeeWithSalaryByDepart() {
-        EmployeeWithSalaryResponse e = new EmployeeWithSalaryResponse();
-        List<EmployeeWithSalaryResponse>list = new ArrayList<>();
+    public Map<String, Map<String, Integer>> getEmployeeWithSalaryByDepart() {
+              return er.findAll().stream()
+                .collect(Collectors.groupingBy(e -> e.getDepartment().getName(),Collectors.toMap(Employee::getName,Employee::getSalary)));
 
-        List<Employee>employees = er.findAll();
-        for (Employee em:employees){
-            e.setDepartmentName(em.getDepartment().getName());
-            e.setName(em.getName());
-            e.setSalary(em.getSalary());
-            list.add(e);
-        }
-
-       return list;
 
     }
 
